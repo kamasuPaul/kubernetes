@@ -1,0 +1,19 @@
+appName: myhelmapp
+namespace: default
+configMap:
+  name: myconfigmapv1.0
+  data:
+    CUSTOM_HEADER: "This is a custom header for an app deployed with helm."
+image:
+  name: devopsjourney1/mywebapp
+  tag: latest
+am:
+  name: apimanager
+  namespace: default
+  image:
+    name: wso2/wso2am
+    tag: 4.0.0-alpine
+  service:
+    name:  am-service
+    externalPort: 9443
+    internalPort: 9443

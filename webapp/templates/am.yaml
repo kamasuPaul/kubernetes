@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.am.name}}
+  namespace: {{.Values.am.namespace}}
+  labels:
+    app: {{.Values.am.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Values.am.name}}
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: {{.Values.am.name}}
+        tier: backend
+    spec: # Pod spec
+      containers:
+      - name: am
+        image: "{{.Values.am.image.name}}:{{.Values.am.image.tag}}"
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: {{.Values.configMap.name}}
+        resources:
+          requests:
+            memory: "1000Mi" 

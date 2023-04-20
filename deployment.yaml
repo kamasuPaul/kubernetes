@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx-deployment
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+          - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 512Mi
+              cpu: "0.2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wso2-api-manager
+spec:
+  selector:
+    matchLabels:
+      app: api-manager
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: api-manager
+    spec:
+      containers:
+        - name: wso2-api-manag
+          image: wso2/wso2am:latest
+          ports:
+          - containerPort: 8280
+          - containerPort: 8243
+          - containerPort: 9443
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 512Mi
+              cpu: "0.2"

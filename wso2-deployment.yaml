@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-manager
+spec:
+  selector:
+    matchLabels:
+      app: api-manager
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: api-manager
+    spec:
+      containers:
+        - name: api-manager
+          image: wso2/wso2am:4.0.0-alpine
+          ports:
+          - containerPort: 8280
+          - containerPort: 8243
+          - containerPort: 9443
+          # resources:
+          #   limits:
+          #     memory: 512Mi
+          #     cpu: "1"
+          #   requests:
+          #     memory: 512Mi
+          #     cpu: "0.2"
