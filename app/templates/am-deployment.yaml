@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.am.name}}
+  namespace: {{.Values.am.namespace}}
+  labels:
+    app: {{.Values.am.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Values.am.name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.am.name}}
+    spec: 
+      containers:
+      - name: am
+        image: wso2/wso2am:4.0.0-alpine
+        ports:
+        - containerPort: 80
+        resources:

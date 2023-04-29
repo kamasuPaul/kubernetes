@@ -1,0 +1,12 @@
+appName: toc
+namespace: default
+am:
+  name: apimanager
+  namespace: default
+  image:
+    name: wso2/wso2am
+    tag: 4.0.0-alpine
+  service:
+    name:  am-service
+    externalPort: 9443
+    internalPort: 9443
